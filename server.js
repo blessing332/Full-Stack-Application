@@ -5,6 +5,8 @@ const express = require('express');
 const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
+const profileSeed = require('./models/profileSeed.js')
+const Date = require('./models/schema.js')
 const db = mongoose.connection;
 require('dotenv').config()
 //___________________
@@ -22,7 +24,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
 // May or may not need these depending on your Mongoose version
-mongoose.connect(MONGODB_URI); 
+mongoose.connect(MONGODB_URI);
 
 // Error / success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
@@ -56,3 +58,7 @@ app.get('/' , (req, res) => {
 //Listener
 //___________________
 app.listen(PORT, () => console.log( 'Listening on port:', PORT));
+
+mongoose.connect('mongodb://127.0.0.1:27017/full-stack-application', () => {
+    console.log('The connection with mongod is established')
+  })
